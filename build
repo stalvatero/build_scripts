@@ -18,9 +18,9 @@ fi
 read -p "Target device: " device
 source build/envsetup.sh
 export LC_ALL=C
-export KBUILD_BUILD_USER=Peppa
-export KBUILD_BUILD_HOST=Peppa-Pig
-export TARGET_UNOFFICIAL_BUILD_ID=Pig
+#export KBUILD_BUILD_USER=Peppa
+#export KBUILD_BUILD_HOST=Peppa-Pig
+#export TARGET_UNOFFICIAL_BUILD_ID=Pig
 lunch lineage_$device-userdebug
 mka target-files-package otatools
 
