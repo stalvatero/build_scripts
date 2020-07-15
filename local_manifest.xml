@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+<remote name="los" fetch="https://github.com/LineageOS/" />
+<remote name="sm6150-dev" fetch="https://github.com/sm6150-dev/" />
+<remote name="ray" fetch="https://github.com/raysenlau/" />
+<remote name="pig" fetch="https://gitlab.com/pig.priv/" />
+<remote name="pe" fetch="https://gitlab.com/PixelExperience/" />
+
+<!-- Xiaomi HAL definitions -->
+<project path="hardware/xiaomi" name="android_hardware_xiaomi" remote="los" revision="lineage-17.1" />
+
+<!-- sm6150 kernel -->
+<project path="kernel/xiaomi/sm6150" name="android_kernel_xiaomi_sm6150" remote="sm6150-dev" revision="lineage-17.1" />
+
+<!-- Xiaomi vendor -->
+<project path="vendor/xiaomi" name="proprietary_vendor_xiaomi" remote="pig" revision="lineage-17.1" />
+
+<!-- PixelLiveWallpaper -->
+<project path="packages/apps/PixelLiveWallpaper" name="packages_apps_PixelLiveWallpaper" remote="pe" revision="ten" />
+
+<!-- Track caf-sm8150 from los -->
+<remove-project name="hardware_qcom-caf_sm8150_audio" />
+<project path="hardware/qcom-caf/sm8150/audio" name="android_hardware_qcom_audio" remote="los" revision="lineage-17.1-caf-sm8150" />
+
+<remove-project name="hardware_qcom-caf_sm8150_display" />
+<project path="hardware/qcom-caf/sm8150/display" name="android_hardware_qcom_display" remote="los" revision="lineage-17.1-caf-sm8150" />
+
+<remove-project name="hardware_qcom-caf_sm8150_media" />
+<project path="hardware/qcom-caf/sm8150/media" name="android_hardware_qcom_media" remote="los" revision="lineage-17.1-caf-sm8150" />
+
+</manifest>

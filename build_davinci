@@ -1,46 +1,70 @@
 #!/bin/bash
-source build/envsetup.sh
-breakfast davinci
-git -C device/xiaomi/davinci/ fetch https://github.com/sm6150-dev/android_device_xiaomi_davinci && git -C device/xiaomi/davinci/ checkout FETCH_HEAD
-git -C device/xiaomi/sm6150-common/ fetch https://github.com/sm6150-dev/android_device_xiaomi_sm6150-common && git -C device/xiaomi/sm6150-common/ checkout FETCH_HEAD
-git -C kernel/xiaomi/sm6150/ fetch https://github.com/sm6150-dev/android_kernel_xiaomi_sm6150 && git -C kernel/xiaomi/sm6150/ checkout FETCH_HEAD
+
 set -e
-changes=(
-278020 # FODCircleView: handle more visibility cases
-278021 # FODCircleView: let's smoothly fade-out the view, before going to View.GONE
-272303 # DozeSensors: only use proximity sensor if supported
-266130 # FODCircleView: Add Support for custom FP pressed icon
-274433 # SystemUI: use DOUBLE_TAP_TO_WAKE setting also for wake from aod
-280082 # FingerprintService: hide InDisplayFingerprintView on Error
-276156 # sdm: mark FOD pressed layer by setting a bit on ZPOS
-279890 # Allow to drop existing fd cache of cgroup path
-)
-repopick ${changes[@]}&
 
-repopick -p 278063 # hal: Add tfa98xx feedback extension
-repopick -p 277176 # VolumeDialog: Implement expand/collapse animation
-repopick -p 279893 # [DNM] Enable USAP by default
-repopick -p 275821 # interfaces: Fix blueprint generation
-repopick -p 272451 # org.ifaa.android.manager: Add ifaa apis to unrestricted greylist
-repopick -p 277273 # MediaProvider: Check hidden directories recursively
-repopick -t ten-network-isolation
-repopick -t ten-firewall
+export LC_ALL=C
 
-green='\033[01;32m'
-restore='\033[0m'
+## handle command line arguments
+read -p "Do you want to sync? (y/N) " choice
 
-clear
+# Initialize local repository
+function init_local_repo() { 
+    echo -e "\033[01;32m\n copy local manifest.xml... \033[0m"
+    cp "$(dirname "$0")/local_manifest.xml" .repo/local_manifests/manifest.xml
+}
 
-DATE_START=$(date +"%s")
-mka bacon -j
+# Initialize pe repository
+function init_main_repo() {  
+    echo -e "\033[01;32m\n init main repo... \033[0m"
+	repo init -u https://github.com/PixelExperience/manifest -b ten-plus --depth=1
+}
 
-echo -e "${green}"
-echo "-------------------"
-echo "Build Completed in:"
-echo "-------------------"
-echo -e "${restore}"
+function sync_repo() {
+    echo -e "\033[01;32m\n sync fetch repo... \033[0m"
+	repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
+}
 
-DATE_END=$(date +"%s")
-DIFF=$(($DATE_END - $DATE_START))
-echo "Time: $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds."
-echo
+function clone_or_checkout() {
+    local dir="$1"
+    local repo="$2"
+    local branch="$3"
+
+    if [[ -d "$dir" ]];then
+        git -C "$dir" fetch https://github.com/raysenlau/"$repo" && git -C "$dir" checkout FETCH_HEAD
+    else
+        git clone https://github.com/raysenlau/"$repo" "$dir"
+    fi
+}
+
+function sync_origin() {
+	echo -e "\033[01;32m\n sync origin device tree... \033[0m"
+	clone_or_checkout device/xiaomi/davinci android_device_xiaomi_davinci
+	clone_or_checkout device/xiaomi/sm6150-common android_device_xiaomi_sm6150-common
+}
+
+function apply_patches() {
+	echo -e "\033[01;32m\n applying patches... \033[0m"
+    bash "$(dirname "$0")/apply-patches.sh" patches
+}
+
+function build_variant() {
+	lunch aosp_davinci-userdebug
+	make installclean
+	mka bacon -j"${JOBS}"
+}
+
+if [[ $choice == *"y"* ]]; then
+    init_local_repo
+	init_main_repo	
+	sync_repo
+	sync_origin
+	apply_patches
+fi
+
+echo -e "\033[01;32m\n###### Build Starting ###### \033[0m"
+
+. build/envsetup.sh
+
+build_variant
+
+echo -e "\033[01;32m\n##### Build Completed ###### \033[0m"
