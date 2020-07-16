@@ -1,4 +1,6 @@
-# PixelExperience build_scripts for davinci
+# (Work In Progress - DO NOT USE)
+#
+# PixelExperience build_scripts for pyxis (Xiaomi MI 9 Lite)
 
 ## Usage:
 ```bash
@@ -13,7 +15,7 @@ git clone https://github.com/raysenlau/build_patches.git patches
 git clone https://github.com/raysenlau/build_scripts.git build_scripts
 
 # run build scripts
-bash build_scripts/build_davinci
+bash build_scripts/build_pyxis
 ```
 
 ## Links:
