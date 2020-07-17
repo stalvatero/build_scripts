@@ -4,16 +4,17 @@ set -e
 
 export LC_ALL=C
 
-# Initialize local repository
-function init_local_repo() {
-    echo -e "\033[01;33m\nCopy local manifest.xml... \033[0m"
-    cp build_scripts/local_manifest.xml .repo/local_manifests/local_manifest.xml
-}
-
 # Initialize pe repository
 function init_main_repo() {
     echo -e "\033[01;33m\nInit main repo... \033[0m"
     repo init -u https://github.com/PixelExperience/manifest -b ten-plus --depth=1
+}
+
+# Initialize local repository
+function init_local_repo() {
+    echo -e "\033[01;33m\nCopy local manifest.xml... \033[0m"
+    mkdir .repo/local_manifests
+    cp build_scripts/local_manifest.xml .repo/local_manifests/local_manifest.xml
 }
 
 function sync_repo() {
@@ -68,8 +69,8 @@ function buildbacon() {
 read -p "Do you want to sync repo? (y/N) " choice_sync
 
 if [[ $choice_sync == *"y"* ]]; then
-    init_local_repo
     init_main_repo
+    init_local_repo
     sync_repo
     apply_patches
 fi
