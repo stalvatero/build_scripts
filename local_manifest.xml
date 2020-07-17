@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
 <remote name="los" fetch="https://github.com/LineageOS/" />
-<remote name="sm6150-dev" fetch="https://github.com/sm6150-dev/" />
+<remote name="hentai" fetch="https://github.com/MemeGang-Development/" />
 <remote name="ray" fetch="https://github.com/raysenlau/" />
-<remote name="pig" fetch="https://gitlab.com/pig.priv/" />
+<remote name="blob" fetch="https://github.com/stalvatero/" />
 <remote name="pe" fetch="https://gitlab.com/PixelExperience/" />
 
 <!-- Xiaomi HAL definitions -->
 <project path="hardware/xiaomi" name="android_hardware_xiaomi" remote="los" revision="lineage-17.1" />
 
-<!-- sm6150 kernel -->
-<project path="kernel/xiaomi/sm6150" name="android_kernel_xiaomi_sm6150" remote="sm6150-dev" revision="lineage-17.1" />
+<!-- Xiaomi Pyxis MI 9 Lite kernel -->
+<project path="kernel/xiaomi/pyxis" name="HentaiKremul" remote="hentai" revision="AkenoHimejima" />
 
-<!-- Xiaomi vendor -->
-<project path="vendor/xiaomi" name="proprietary_vendor_xiaomi" remote="pig" revision="lineage-17.1" />
+<!-- Xiaomi Pyxis MI 9 Lite vendor -->
+<project path="vendor/xiaomi/pyxis" name="android_vendor_xiaomi" remote="blob" revision="master" />
 
 <!-- PixelLiveWallpaper -->
 <project path="packages/apps/PixelLiveWallpaper" name="packages_apps_PixelLiveWallpaper" remote="pe" revision="ten" />
@@ -35,5 +35,12 @@
 <project path="vendor/nxp/opensource/commonsys/packages/apps/Nfc" name="android_vendor_nxp_opensource_packages_apps_Nfc" remote="los" revision="lineage-17.1" />
 <project path="vendor/nxp/opensource/sn100x/halimpl" name="android_vendor_nxp_opensource_halimpl" remote="los" revision="lineage-17.1-sn100x" />
 <project path="vendor/nxp/opensource/sn100x/hidlimpl" name="android_vendor_nxp_opensource_hidlimpl" remote="los" revision="lineage-17.1-sn100x" />
+
+<!-- Remove AOSP stuff -->
+<remove-project name="platform/prebuilts/clang/host/linux-x86" />
+
+<!-- Add latest Clang support -->
+<project path="prebuilts/clang/host/linux-x86/clang-11" name="kdrag0n/proton-clang" remote="github" revision="master" />
+<project path="prebuilts/clang/host/linux-x86" name="AOSIP/platform_prebuilts_clang_host_linux-x86" remote="github" revision="ten" />
 
 </manifest>

@@ -8,27 +8,21 @@
 mkdir aosp
 cd aosp
 
-# clone build_patches into aosp
-git clone https://github.com/raysenlau/build_patches.git patches
-
 # clone build_scripts into aosp
-git clone https://github.com/raysenlau/build_scripts.git build_scripts
+git clone https://github.com/stalvatero/build_scripts.git build_scripts
 
 # run build scripts
-bash build_scripts/build_pyxis
+bash build_scripts/build_pyxis.sh
 ```
 
 ## Links:
 ```bash
 # device
-https://github.com/raysenlau/android_device_xiaomi_davinci
-
-# sm6150-common
-https://github.com/raysenlau/android_device_xiaomi_sm6150-common
+https://github.com/stalvatero/android_device_xiaomi_pyxis
 
 # kernel
-https://github.com/sm6150-dev/android_kernel_xiaomi_sm6150
+https://github.com/MemeGang-Development/HentaiKremul
 
 # vendor
-https://gitlab.com/pig.priv/proprietary_vendor_xiaomi
+https://gitlab.com/SlimShadys/android_vendor_xiaomi_pyxis
 ```
