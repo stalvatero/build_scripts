@@ -21,23 +21,6 @@ function sync_repo() {
     repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 }
 
-function clone_or_checkout() {
-    local dir="$1"
-    local repo="$2"
-    local branch="$3"
-
-    if [[ -d "$dir" ]];then
-        git -C "$dir" fetch https://github.com/stalvatero/"$repo" && git -C "$dir" checkout FETCH_HEAD
-    else
-        git clone https://github.com/stalvatero/"$repo" "$dir"
-    fi
-}
-
-function sync_origin() {
-    echo -e "\033[01;33m\nSync origin device tree... \033[0m"
-    clone_or_checkout device/xiaomi/pyxis android_device_xiaomi_pyxis
-}
-
 function apply_patches() {
     echo -e "\033[01;33m\nApplying patches... \033[0m"
     bash "$(dirname "$0")/apply-patches.sh" patches
@@ -88,7 +71,6 @@ if [[ $choice_sync == *"y"* ]]; then
     init_local_repo
     init_main_repo
     sync_repo
-    sync_origin
     apply_patches
 fi
 
