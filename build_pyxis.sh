@@ -7,7 +7,7 @@ export LC_ALL=C
 # Initialize local repository
 function init_local_repo() {
     echo -e "\033[01;33m\nCopy local manifest.xml... \033[0m"
-    cp "$(dirname "$0")/local_manifest.xml" .repo/local_manifests/manifest.xml
+    cp build_scripts/local_manifest.xml .repo/local_manifests/local_manifest.xml
 }
 
 # Initialize pe repository
@@ -23,7 +23,7 @@ function sync_repo() {
 
 function apply_patches() {
     echo -e "\033[01;33m\nApplying patches... \033[0m"
-    bash "$(dirname "$0")/apply-patches.sh" patches
+    bash build_scripts/apply-patches.sh patches
 }
 
 function envsetup() {
