@@ -8,6 +8,9 @@
 mkdir aosp
 cd aosp
 
+# clone build_patches into aosp
+git clone https://github.com/stalvatero/build_patches.git patches
+
 # clone build_scripts into aosp
 git clone https://github.com/stalvatero/build_scripts.git build_scripts
 
