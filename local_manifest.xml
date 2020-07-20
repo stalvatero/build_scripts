@@ -5,8 +5,8 @@
 <remote name="dark" fetch="https://github.com/stalvatero/" />
 <remote name="pe" fetch="https://gitlab.com/PixelExperience/" />
 
-<!-- Xiaomi HAL definitions -->
-<project path="hardware/xiaomi" name="android_hardware_xiaomi" remote="los" revision="lineage-17.1" />
+<!-- Xiaomi HAL definitions
+<project path="hardware/xiaomi" name="android_hardware_xiaomi" remote="los" revision="lineage-17.1" /> -->
 
 <!-- Xiaomi Pyxis MI 9 Lite device tree -->
 <project path="device/xiaomi/pyxis" name="android_device_xiaomi_pyxis" remote="dark" revision="PEwip" />
@@ -15,7 +15,7 @@
 <project path="kernel/xiaomi/pyxis" name="HentaiKremul" remote="hentai" revision="AkenoHimejima" />
 
 <!-- Xiaomi Pyxis MI 9 Lite vendor -->
-<project path="vendor/xiaomi/pyxis" name="android_vendor_xiaomi_pyxis" remote="dark" revision="master" />
+<project path="vendor/xiaomi/pyxis" name="vendor_xiaomi_pyxis" remote="dark" revision="master" />
 
 <!-- PixelLiveWallpaper -->
 <project path="packages/apps/PixelLiveWallpaper" name="packages_apps_PixelLiveWallpaper" remote="pe" revision="ten" />
@@ -23,10 +23,8 @@
 <!-- Track caf-sm8150 from los -->
 <remove-project name="hardware_qcom-caf_sm8150_audio" />
 <project path="hardware/qcom-caf/sm8150/audio" name="android_hardware_qcom_audio" remote="los" revision="lineage-17.1-caf-sm8150" />
-
 <remove-project name="hardware_qcom-caf_sm8150_display" />
 <project path="hardware/qcom-caf/sm8150/display" name="android_hardware_qcom_display" remote="los" revision="lineage-17.1-caf-sm8150" />
-
 <remove-project name="hardware_qcom-caf_sm8150_media" />
 <project path="hardware/qcom-caf/sm8150/media" name="android_hardware_qcom_media" remote="los" revision="lineage-17.1-caf-sm8150" />
 
