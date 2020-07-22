@@ -19,6 +19,9 @@
 
 <!-- PixelLiveWallpaper -->
 <project path="packages/apps/PixelLiveWallpaper" name="packages_apps_PixelLiveWallpaper" remote="pe" revision="ten" />
+  
+<!-- Face Unlock 4 PE
+<project path="external/motorola/faceunlock" name="external_motorola_faceunlock" remote="dark" revision="ten" /> -->
 
 <!-- Track caf-sm8150 from los -->
 <remove-project name="hardware_qcom-caf_sm8150_audio" />
